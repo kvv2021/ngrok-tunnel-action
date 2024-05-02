@@ -30,13 +30,13 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    - run: wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+    - run: wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
       shell: bash
-    - run: unzip -qq ngrok-stable-linux-amd64.zip
+    - run: sudo tar -xvzf ngrok-v3-stable-linux-amd64.tgz -C /usr/local/bin
       shell: bash
-    - run: ./ngrok authtoken ${{ inputs.ngrok_authtoken }}
+    - run: /usr/local/bin/ngrok authtoken ${{ inputs.ngrok_authtoken }}
       shell: bash
-    - run: ( timeout ${{ inputs.timeout }} ./ngrok ${{ inputs.tunnel_type }} ${{ inputs.port }} ) &
+    - run: ( timeout ${{ inputs.timeout }} /usr/local/bin/ngrok ${{ inputs.tunnel_type }} ${{ inputs.port }} ) &
       shell: bash
       
     - id: print-tunnel-url
